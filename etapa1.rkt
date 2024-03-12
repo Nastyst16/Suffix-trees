@@ -146,4 +146,31 @@
 ; arbore de sufixe și un șablon și întoarce true dacă șablonul
 ; apare în arbore, respectiv false în caz contrar.
 (define (st-has-pattern? st pattern)
-  'your-code-here)
+
+ ; (if (equal? (match-pattern-with-label st pattern) #f)
+ ;     #f
+ ;     #t
+ ;    )
+
+  (match-pattern-with-label st pattern)
+
+  (cond
+    ((equal? (match-pattern-with-label st pattern) #t) #t)
+    ((equal? (car (match-pattern-with-label st pattern)) #f) #f)
+    (else #t) ;(match-pattern-with-label st pattern))
+    
+    )
+                                                           
+
+  
+  ;'your-code-here
+  )
+
+
+
+
+
+
+
+
+
