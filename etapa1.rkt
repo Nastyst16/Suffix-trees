@@ -97,25 +97,38 @@
 ; Obs: deși exemplele folosesc stringuri pentru claritate, vă
 ; reamintim că în realitate lucrăm cu liste de caractere.
 (define (match-pattern-with-label st pattern)
-  'your-code-here)
+  ;(helper-exercise-4 pattern pattern st)
 
+  ;(display (length (car (longest-common-prefix pattern (get-branch-label (get-ch-branch st (car pattern)))))))
 
-(define (helper-exercise-4 (prefix rest-of-pattern subtree))
+  ;(display (get-branch-label (get-ch-branch st (car pattern))))
 
-  (cond
-    ((null? rest-of-pattern) '()) ; am gasit cuvantul
-    ((not null? subtree)
-     (let (the-following-subtree (get-ch-branch subtree, (car prefix))
-         ; the-following-subtree este subarborele unde am gasit o parte din prefix
+  
+  (if (equal? (get-ch-branch st (car pattern)) #f)
+      (list #f '())
+      (helper-exercise-4 st pattern)
 
-
-         (longest-common-prefix prefix (get-branch-label the-following-subtree))
+      )
   
 
 
+  
+  ;'yourcode
+  )
+
+(define (helper-exercise-4 st pattern)
+
+  (if (= (length (car (longest-common-prefix pattern (get-branch-label (get-ch-branch st (car pattern)))))) (length pattern))
+      #t
+      (list (car (longest-common-prefix pattern (get-branch-label (get-ch-branch st (car pattern)))))
+             (drop pattern (length (car (longest-common-prefix pattern (get-branch-label (get-ch-branch st (car pattern)))))))
+             (cdr (get-ch-branch st (car pattern)))
+            )
+      )
+
 
   )
-  )
+
 
  
 ; TODO 5
