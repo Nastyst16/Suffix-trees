@@ -120,14 +120,31 @@
 
   (if (= (length (car (longest-common-prefix pattern (get-branch-label (get-ch-branch st (car pattern)))))) (length pattern))
       #t
+
+      
       (list (car (longest-common-prefix pattern (get-branch-label (get-ch-branch st (car pattern)))))
              (drop pattern (length (car (longest-common-prefix pattern (get-branch-label (get-ch-branch st (car pattern)))))))
              (cdr (get-ch-branch st (car pattern)))
             )
       )
 
+  (cond
+    ((= (length (car (longest-common-prefix pattern (get-branch-label (get-ch-branch st (car pattern)))))) (length pattern)) #t)
+
+    ((< (length (car (longest-common-prefix pattern (get-branch-label (get-ch-branch st (car pattern)))))) (length (get-branch-label (get-ch-branch st (car pattern)))))
+     (list #f (car (longest-common-prefix pattern (get-branch-label (get-ch-branch st (car pattern))))))
+     )
+    
+    (else (list (car (longest-common-prefix pattern (get-branch-label (get-ch-branch st (car pattern)))))
+             (drop pattern (length (car (longest-common-prefix pattern (get-branch-label (get-ch-branch st (car pattern)))))))
+             (cdr (get-ch-branch st (car pattern)))
+            )
+          )
+    )
 
   )
+
+
 
 
  
