@@ -99,6 +99,24 @@
 (define (match-pattern-with-label st pattern)
   'your-code-here)
 
+
+(define (helper-exercise-4 (prefix rest-of-pattern subtree))
+
+  (cond
+    ((null? rest-of-pattern) '()) ; am gasit cuvantul
+    ((not null? subtree)
+     (let (the-following-subtree (get-ch-branch subtree, (car prefix))
+         ; the-following-subtree este subarborele unde am gasit o parte din prefix
+
+
+         (longest-common-prefix prefix (get-branch-label the-following-subtree))
+  
+
+
+
+  )
+  )
+
  
 ; TODO 5
 ; Implementați funcția st-has-pattern? care primește un
