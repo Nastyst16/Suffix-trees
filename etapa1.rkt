@@ -97,37 +97,32 @@
 ; Obs: deși exemplele folosesc stringuri pentru claritate, vă
 ; reamintim că în realitate lucrăm cu liste de caractere.
 (define (match-pattern-with-label st pattern)
-  ;(helper-exercise-4 pattern pattern st)
 
-  ;(display (length (car (longest-common-prefix pattern (get-branch-label (get-ch-branch st (car pattern)))))))
-
-  ;(display (get-branch-label (get-ch-branch st (car pattern))))
-
-  
   (if (equal? (get-ch-branch st (car pattern)) #f)
       (list #f '())
       (helper-exercise-4 st pattern)
 
       )
   
-
-
-  
-  ;'yourcode
   )
 
 (define (helper-exercise-4 st pattern)
 
-  (if (= (length (car (longest-common-prefix pattern (get-branch-label (get-ch-branch st (car pattern)))))) (length pattern))
-      #t
-
-      
-      (list (car (longest-common-prefix pattern (get-branch-label (get-ch-branch st (car pattern)))))
-             (drop pattern (length (car (longest-common-prefix pattern (get-branch-label (get-ch-branch st (car pattern)))))))
-             (cdr (get-ch-branch st (car pattern)))
+  (let ((branch-label (get-branch-label (get-ch-branch st (car pattern))))
+        (longest-c-prefix (car (longest-common-prefix pattern (get-branch-label (get-ch-branch st (car pattern)))))))
+    (cond
+      ((= (length longest-c-prefix) (length pattern)) #t)
+      ((< (length longest-c-prefix) (length branch-label)) (list #f longest-c-prefix))
+      (else (list longest-c-prefix (drop pattern (length longest-c-prefix)) (cdr (get-ch-branch st (car pattern)))
+                  )
             )
       )
+    )
+  )
 
+
+; varianta fara let
+  #|
   (cond
     ((= (length (car (longest-common-prefix pattern (get-branch-label (get-ch-branch st (car pattern)))))) (length pattern)) #t)
 
@@ -143,9 +138,7 @@
     )
 
   )
-
-
-
+|#
 
  
 ; TODO 5
