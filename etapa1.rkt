@@ -145,25 +145,33 @@
 ; Implementați funcția st-has-pattern? care primește un
 ; arbore de sufixe și un șablon și întoarce true dacă șablonul
 ; apare în arbore, respectiv false în caz contrar.
-(define (st-has-pattern? st pattern)
 
- ; (if (equal? (match-pattern-with-label st pattern) #f)
- ;     #f
- ;     #t
- ;    )
-
-  (match-pattern-with-label st pattern)
+(define (helper-exercise-5 st pattern)
 
   (cond
+    ((null? st) #f)
+    ((null? pattern) #t)
     ((equal? (match-pattern-with-label st pattern) #t) #t)
-    ((equal? (car (match-pattern-with-label st pattern)) #f) #f)
-    (else #t) ;(match-pattern-with-label st pattern))
-    
+    (else (helper-exercise-5 (list-ref (match-pattern-with-label st pattern) 2) (list-ref (match-pattern-with-label st pattern) 1)))
     )
-                                                           
 
   
-  ;'your-code-here
+  )
+
+
+
+
+(define (st-has-pattern? st pattern)
+
+  (cond
+    ((null? st) #t)
+    ((null? pattern) #t)
+    ((equal? (match-pattern-with-label st pattern) #t) #t)
+    ; mai jos este cazul in care ajungem pe frunza:
+    ((and (null? (cdr (cdr (match-pattern-with-label st pattern)))) (not (equal? (longest-common-prefix (get-branch-label st) pattern) pattern))) #f)
+    (else (st-has-pattern? (car (cdr (cdr (match-pattern-with-label st pattern)))) (car (cdr (match-pattern-with-label st pattern)))))
+    )
+
   )
 
 
